@@ -13,20 +13,21 @@
         if (p2pml.hlsjs.Engine.isSupported()) {
             var engine = new p2pml.hlsjs.Engine();
 
-            var player = new Clappr.Player({
-                parentId: "#player",
-                source: "https://pubads.g.doubleclick.net/ssai/event/yeYP86THQ4yl7US8Zx5eug/master.m3u8",
-                mute: true,
-                autoPlay: true,
-                playback: {
-                    hlsjsConfig: {
-                        liveSyncDurationCount: 7,
-                        loader: engine.createLoaderClass()
-                    }
-                }
-            });
+var player = flowplayer("#video", {
+    clip: {
+        sources: [{
+            src: "https://pubads.g.doubleclick.net/ssai/event/yeYP86THQ4yl7US8Zx5eug/master.m3u8",
+            type: "application/x-mpegurl"
+        }]
+    },
+    hlsjs: {
+        liveSyncDurationCount: 7,
+        loader: engine.createLoaderClass(),
+        safari: true
+    }
+});
 
-            p2pml.hlsjs.initClapprPlayer(player);
+p2pml.hlsjs.initFlowplayerHlsJsPlayer(player);
         } else {
             document.write("Not supported :(");
         }
