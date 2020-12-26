@@ -1,5 +1,27 @@
-<!-- wp:paragraph -->
-<p>Note: This is third party hosted stream, There might be ads. Just close and watch it in full screen.</p>
-<!-- /wp:paragraph -->
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/clappr@latest/dist/clappr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.js"></script>
+  </head>
 
-<p><iframe id="canal" src="https://www.doomovie-hd.com/?r=tv_view&amp;id=156" name="canal" width="1080px" height="1080px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen="allowfullscreen"></iframe></p>
+  <body>
+    <div id="player"></div>
+    <script>
+      var player = new Clappr.Player(
+        {
+          source: 'https://pubads.g.doubleclick.net/ssai/event/DD7fA-HgSUaLyZp9AjRYxQ/master.m3u8?HjFreeTV=SIXHD',
+          plugins: [DashShakaPlayback],
+          shakaConfiguration: {
+            preferredAudioLanguage: 'pt-BR',
+            streaming: {
+              rebufferingGoal: 15
+            }
+          },
+          shakaOnBeforeLoad: function(shaka_player) {
+            // shaka_player.getNetworkingEngine().registerRequestFilter() ...
+          },
+          parentId: '#player'
+        });
+    </script>
+  </body>
+</html>
